@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OnScreen Translator</string>
+    <string name="accessibility_service_name">OnScreen Bilibili Translator Service</string>
+    <string name="accessibility_service_desc">Inspects on-screen Chinese text in Bilibili to provide real-time Arabic and English floating translation overlays.</string>
+    <string name="notification_channel_name">Translator Service Channel</string>
+    <string name="notification_channel_desc">Active background translation and audio capture services.</string>
+    <string name="service_running_title">OnScreen Translator Active</string>
+    <string name="service_running_desc">Capturing UI and Audio for live subtitle translation.</string>
+</resources>
