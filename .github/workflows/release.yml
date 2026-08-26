@@ -1,6 +1,6 @@
 name: Build and Release APK
 
-on:
+on: "main" 
   push:
     tags:
       - 'v*'
