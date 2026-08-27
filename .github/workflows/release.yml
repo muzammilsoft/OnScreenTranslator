@@ -36,6 +36,16 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Ensure Gradle Wrapper & Permissions
+        run: |
+          if [ ! -f "./gradlew" ]; then
+            echo "gradlew not found in repository. Generating wrapper..."
+            gradle wrapper || true
+          fi
+          if [ -f "./gradlew" ]; then
+            chmod +x ./gradlew
+          fi
+
       - name: Prepare or Auto-Generate Release Keystore
         run: |
           if [ -n "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" ]; then
@@ -61,7 +71,12 @@ jobs:
           fi
 
       - name: Build Release APK
-        run: ./gradlew assembleRelease --no-daemon --stacktrace
+        run: |
+          if [ -f "./gradlew" ]; then
+            ./gradlew assembleRelease --no-daemon --stacktrace
+          else
+            gradle assembleRelease --no-daemon --stacktrace
+          fi
         env:
           STORE_FILE: /tmp/keystore.jks
           STORE_PASSWORD: ${{ env.STORE_PASSWORD }}
